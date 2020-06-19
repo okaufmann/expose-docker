@@ -4,4 +4,4 @@ services:
     image: okaufmann/expose-docker:latest
     ports:
       - "8080:3000"
-    command: "expose serve share.novu.ch --port=3000 --validateAuthTokens"
+    command: "expose serve your-domain.com --port=3000 --validateAuthTokens"
