@@ -9,6 +9,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 
 RUN composer global require hirak/prestissimo
+
 RUN composer global require beyondcode/expose
+COPY config.php /root/.expose/config.php
 
 CMD ["expose", "serve"]

@@ -3,5 +3,7 @@ services:
   frontend:
     image: okaufmann/expose-docker:latest
     ports:
-      - "8080:3000"
-    command: "expose serve your-domain.com --port=3000 --validateAuthTokens"
+      - "8080:8080"
+    command: "expose serve your-domain.com --port=8080 --host=0.0.0.0"
+    environment:
+      - VALIDATE_AUTH_TOKENS=true
