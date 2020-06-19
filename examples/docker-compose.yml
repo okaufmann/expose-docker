@@ -1,0 +1,7 @@
+version: "3.5"
+services:
+  frontend:
+    image: okaufmann/expose-docker
+    ports:
+      - "8080:3000"
+    command: "expose serve share.novu.ch --port=3000 --validateAuthTokens"
