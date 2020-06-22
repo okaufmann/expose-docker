@@ -41,7 +41,7 @@ return [
     | > expose token YOUR-AUTH-TOKEN
     |
     */
-    'auth_token' => '',
+    'auth_token' => env('AUTH_TOKEN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     | requests and responses in the local dashboard.
     |
     */
-    'max_logged_requests' => 25,
+    'max_logged_requests' => env('MAX_LOGGED_REQUESTS', 25),
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
     | The maximum memory allocated to the expose process.
     |
     */
-    'memory_limit' => '128M',
+    'memory_limit' => env('MEMORY_LIMIT', '128M'),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,7 @@ return [
         | clients can stay connected as long as they want.
         |
         */
-        'maximum_connection_length' => 0,
+        'maximum_connection_length' => env('MAXIMUM_CONNECTION_LENGTH', 0),
 
         /*
         |--------------------------------------------------------------------------
@@ -225,11 +225,11 @@ return [
         |
         */
         'messages' => [
-            'message_of_the_day' => 'Thank you for using expose.',
+            'message_of_the_day' => env('MESSAGE_OF_THE_DAY', 'Thank you for using expose.'),
 
-            'invalid_auth_token' => 'Authentication failed. Please check your authentication token and try again.',
+            'invalid_auth_token' => env('INVALID_AUTH_TOKEN_MESSAGE', 'Authentication failed. Please check your authentication token and try again.'),
 
-            'subdomain_taken' => 'The chosen subdomain :subdomain is already taken. Please choose a different subdomain.',
+            'subdomain_taken' => env('SUBDOMAIN_TAKEN_MESSAGE', 'The chosen subdomain :subdomain is already taken. Please choose a different subdomain.'),
         ],
     ],
 ];
