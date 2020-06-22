@@ -199,7 +199,7 @@ return [
         |
         */
         'users' => [
-            'username' => 'password',
+            env('DASHBOARD_USER', 'username') => env('DASHBOARD_PASSWORD', 'password'),
         ],
 
         /*
