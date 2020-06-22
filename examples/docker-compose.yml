@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     command: "expose serve your-domain.com"
     volumes:
-      - ./.data:/root/.expose/
+      - ./.data/expose.db:/root/.expose/expose.db
     environment:
       - VALIDATE_AUTH_TOKENS=true
       - DASHBOARD_USER=admin

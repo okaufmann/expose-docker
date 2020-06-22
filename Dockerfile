@@ -13,4 +13,6 @@ RUN composer global require hirak/prestissimo
 RUN composer global require beyondcode/expose
 COPY config.php /root/.expose/config.php
 
+VOLUME [ "/root/.expose/expose.db" ]
+
 CMD ["expose", "serve"]
