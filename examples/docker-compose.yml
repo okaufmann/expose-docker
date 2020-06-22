@@ -6,6 +6,8 @@ services:
     ports:
       - "8080:8080"
     command: "expose serve your-domain.com"
+    volumes:
+      - ./.data:/root/.expose/
     environment:
       - VALIDATE_AUTH_TOKENS=true
       - DASHBOARD_USER=admin
