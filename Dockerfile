@@ -15,4 +15,6 @@ COPY config.php /root/.expose/config.php
 
 VOLUME [ "/root/.expose/" ]
 
+WORKDIR /root
+
 CMD ["expose", "serve"]
