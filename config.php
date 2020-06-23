@@ -149,7 +149,7 @@ return [
         | admin interface.
         |
         */
-        'validate_auth_tokens' => env('VALIDATE_AUTH_TOKENS'),
+        'validate_auth_tokens' => env('VALIDATE_AUTH_TOKENS', false),
 
         /*
         |--------------------------------------------------------------------------
