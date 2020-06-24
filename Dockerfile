@@ -7,14 +7,16 @@ RUN apt-get update && apt-get install -y git curl wget zip \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     chmod +x /usr/local/bin/composer
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
-
 RUN composer global require hirak/prestissimo
 
-RUN composer global require beyondcode/expose
+COPY ./expose /app
+RUN cd /app && composer install --optimize-autoloader --prefer-dist && chmod a+x /app/expose
+
 COPY config.php /root/.expose/config.php
 
 VOLUME [ "/root/.expose/" ]
+VOLUME [ "/app/resources/views/server" ]
 
-WORKDIR /root
+WORKDIR /app
 
-CMD ["expose", "serve"]
+ENTRYPOINT ["/app/expose"]

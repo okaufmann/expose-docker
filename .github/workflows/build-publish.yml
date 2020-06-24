@@ -9,6 +9,15 @@ jobs:
     steps:
         - uses: actions/checkout@v2
 
+        - uses: actions/checkout@v2
+          with:
+            repository: beyondcode/expose
+            ref: refs/tags/1.2.2
+            path: expose/
+
+        - name: Cleanup
+          run: rm -Rf expose/.git && rm -Rf expose/tests
+
         - name: Push to Docker Hub
           uses: docker/build-push-action@v1
           with:
