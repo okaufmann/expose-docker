@@ -128,7 +128,7 @@ return [
          * | Valid suffixes are: B, KB, MB, GB.
          * | Ex: 500B, 1KB, 2MB, 3GB.
          */
-        'size' => '1MB',
+        'size' => env('MAXIMUM_LOG_BODY_SIZE', '1MB'),
     ],
 
     'admin' => [
