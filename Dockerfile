@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:8.0-cli
 
 # add basic tools
 RUN apt-get update && apt-get install -y git curl wget zip \
