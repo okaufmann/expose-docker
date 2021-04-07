@@ -57,6 +57,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default HTTPS
+    |--------------------------------------------------------------------------
+    |
+    | Whether to use HTTPS as a default when sharing your local sites. Expose
+    | will try to look up the protocol if you are using Laravel Valet
+    | automatically. Otherwise you can specify it here manually.
+    |
+    */
+    'default_https' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Maximum Logged Requests
     |--------------------------------------------------------------------------
     |
@@ -78,7 +90,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Maximum Allowed Memory
+    | Skip Response Logging
     |--------------------------------------------------------------------------
     |
     | Sometimes, some responses don't need to be logged. Some are too big,
@@ -93,29 +105,29 @@ return [
     */
     'skip_body_log' => [
         /*
-        | Skip response logging by HTTP response code. Format: 4*, 5*
-        */
+         * | Skip response logging by HTTP response code. Format: 4*, 5*.
+         */
         'status' => [
             // "4*"
         ],
         /*
-        | Skip response logging by HTTP response content type. Ex: "text/css"
-        */
+         * | Skip response logging by HTTP response content type. Ex: "text/css".
+         */
         'content_type' => [
             //
         ],
         /*
-        | Skip response logging by file extension. Ex: ".js.map", ".min.js", ".min.css"
-        */
+         * | Skip response logging by file extension. Ex: ".js.map", ".min.js", ".min.css".
+         */
         'extension' => [
             '.js.map',
             '.css.map',
         ],
         /*
-        | Skip response logging if response size is greater than configured value.
-        | Valid suffixes are: B, KB, MB, GB.
-        | Ex: 500B, 1KB, 2MB, 3GB
-        */
+         * | Skip response logging if response size is greater than configured value.
+         * | Valid suffixes are: B, KB, MB, GB.
+         * | Ex: 500B, 1KB, 2MB, 3GB.
+         */
         'size' => '1MB',
     ],
 
@@ -132,7 +144,7 @@ return [
         |
         */
         'database' => implode(DIRECTORY_SEPARATOR, [
-            $_SERVER['HOME'] ?? $_SERVER['USERPROFILE'] ?? __DIR__,
+            $_SERVER['HOME'] ?? __DIR__,
             '.expose',
             'expose.db',
         ]),
@@ -150,6 +162,24 @@ return [
         |
         */
         'validate_auth_tokens' => env('VALIDATE_AUTH_TOKENS', false),
+
+        /*
+        |--------------------------------------------------------------------------
+        | TCP Port Range
+        |--------------------------------------------------------------------------
+        |
+        | Expose allows you to also share TCP ports, for example when sharing your
+        | local SSH server with the public. This setting allows you to define the
+        | port range that Expose will use to assign new ports to the users.
+        |
+        | Note: Do not use port ranges below 1024, as it might require root
+        | privileges to assign these ports.
+        |
+        */
+        'tcp_port_range' => [
+            'from' => 50000,
+            'to' => 60000,
+        ],
 
         /*
         |--------------------------------------------------------------------------
@@ -214,6 +244,8 @@ return [
         */
         'user_repository' => \App\Server\UserRepository\DatabaseUserRepository::class,
 
+        'subdomain_repository' => \App\Server\SubdomainRepository\DatabaseSubdomainRepository::class,
+
         /*
         |--------------------------------------------------------------------------
         | Messages
@@ -229,7 +261,11 @@ return [
 
             'invalid_auth_token' => env('INVALID_AUTH_TOKEN_MESSAGE', 'Authentication failed. Please check your authentication token and try again.'),
 
-            'subdomain_taken' => env('SUBDOMAIN_TAKEN_MESSAGE', 'The chosen subdomain :subdomain is already taken. Please choose a different subdomain.'),
+            'subdomain_taken' => 'The chosen subdomain :subdomain is already taken. Please choose a different subdomain.',
+
+            'custom_subdomain_unauthorized' => 'You are not allowed to specify custom subdomains. Please upgrade to Expose Pro. Assigning a random subdomain instead.',
+
+            'no_free_tcp_port_available' => 'There are no free TCP ports available on this server. Please try again later.',
         ],
     ],
 ];
