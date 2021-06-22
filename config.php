@@ -13,7 +13,7 @@ return [
     |
     */
     'servers' => [
-        'default' => [
+        'main' => [
             'host' => env('DOMAIN'),
             'port' => env('PORT', 443),
         ],
@@ -32,7 +32,18 @@ return [
     | if available.
     |
     */
-    'server_endpoint' => 'https://beyondco.de/api/expose/servers',
+    'server_endpoint' => 'https://expose.dev/api/servers',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Server
+    |--------------------------------------------------------------------------
+    |
+    | The default server from the servers array,
+    | or the servers endpoint above.
+    |
+    */
+    'default_server' => 'main',
 
     /*
     |--------------------------------------------------------------------------
@@ -59,6 +70,20 @@ return [
     |
     */
     'auth_token' => env('AUTH_TOKEN'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Domain
+    |--------------------------------------------------------------------------
+    |
+    | The custom domain to use when sharing sites with Expose.
+    | You can register your own custom domain using Expose Pro
+    | Learn more at: https://expose.dev/get-pro
+    |
+    | > expose default-domain YOUR-CUSTOM-WHITELABEL-DOMAIN
+    |
+    */
+    'default_domain' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -313,11 +338,17 @@ return [
         |
         */
         'messages' => [
+            'resolve_connection_message' => function ($connectionInfo, $user) {
+                return config('expose.admin.messages.message_of_the_day');
+            },
+
             'message_of_the_day' => env('MESSAGE_OF_THE_DAY', 'Thank you for using expose.'),
 
             'invalid_auth_token' => env('INVALID_AUTH_TOKEN_MESSAGE', 'Authentication failed. Please check your authentication token and try again.'),
 
             'subdomain_taken' => 'The chosen subdomain :subdomain is already taken. Please choose a different subdomain.',
+
+            'subdomain_reserved' => 'The chosen subdomain :subdomain is not available. Please choose a different subdomain.',
 
             'custom_subdomain_unauthorized' => 'You are not allowed to specify custom subdomains. Please upgrade to Expose Pro. Assigning a random subdomain instead.',
 
