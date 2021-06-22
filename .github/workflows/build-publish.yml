@@ -11,7 +11,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          repository: okaufmann/expose
+          repository: beyondcode/expose
           ref: master
           path: expose/
 
